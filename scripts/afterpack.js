@@ -24,10 +24,10 @@ function fixSetuid(context) {
 function getAppFileName(context) {
     switch (context.electronPlatformName) {
     case 'win32':
-        return 'Mattermost.exe';
+        return 'X9 Trader Multi-Server.exe';
     case 'darwin':
     case 'mas':
-        return 'Mattermost.app';
+        return 'X9 Trader Multi-Server.app';
     case 'linux':
         return context.packager.executableName;
     default:
@@ -38,7 +38,8 @@ function getAppFileName(context) {
 exports.default = async function afterPack(context) {
     try {
         await flipFuses(
-            `${context.appOutDir}/${getAppFileName(context)}`, // Returns the path to the electron binary
+            // eslint-disable-next-line no-useless-escape
+            `${context.appOutDir}/${getAppFileName(context).replaceAll(' ', '\ ')}`, // Returns the path to the electron binary
             {
                 version: FuseVersion.V1,
                 [FuseV1Options.RunAsNode]: false, // Disables ELECTRON_RUN_AS_NODE
