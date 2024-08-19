@@ -3,13 +3,12 @@
 
 import classNames from 'classnames';
 import React, {useState, useCallback, useEffect, useRef} from 'react';
-import {useIntl, FormattedMessage} from 'react-intl';
+import {useIntl} from 'react-intl';
 
 import {MODAL_TRANSITION_TIMEOUT, SPLASH_GIF_TIMEOUT, URLValidationStatus} from 'common/utils/constants';
 import DarkSplash from 'renderer/assets/DarkSplash.gif';
 import LightSplash from 'renderer/assets/LightSplash.gif';
 import Logo from 'renderer/assets/Logo.png';
-import womanLaptop from 'renderer/assets/svg/womanLaptop.svg';
 import Input, {STATUS, SIZE} from 'renderer/components/Input';
 import LoadingBackground from 'renderer/components/LoadingScreen/LoadingBackground';
 import SaveButton from 'renderer/components/SaveButton/SaveButton';
@@ -24,8 +23,6 @@ type ConfigureServerProps = {
     server?: UniqueServer;
     mobileView?: boolean;
     darkMode?: boolean;
-    messageTitle?: string;
-    messageSubtitle?: string;
     cardTitle?: string;
     alternateLinkMessage?: string;
     alternateLinkText?: string;
@@ -37,8 +34,6 @@ function ConfigureServer({
     server,
     mobileView,
     darkMode,
-    messageTitle,
-    messageSubtitle,
     cardTitle,
     alternateLinkMessage,
     alternateLinkText,
