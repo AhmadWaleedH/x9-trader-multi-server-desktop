@@ -4,8 +4,6 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import LoadingBackground from './LoadingBackground';
-
 import useTransitionEnd from '../../hooks/useTransitionEnd';
 import LoadingAnimation from '../LoadingAnimation';
 
