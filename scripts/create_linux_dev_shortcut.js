@@ -7,15 +7,15 @@ const path = require('path');
 // For linux dev, drop a desktop shortcut so deep linking works correctly
 if (process.platform === 'linux') {
     const xdgDir = path.resolve(process.env.HOME, '.local/share/applications');
-    if (fs.existsSync(xdgDir) && !fs.existsSync(path.resolve(xdgDir, 'mattermost-desktop-dev.desktop'))) {
+    if (fs.existsSync(xdgDir) && !fs.existsSync(path.resolve(xdgDir, 'x9-trader-multi-server-desktop-dev.desktop'))) {
         fs.writeFileSync(
-            path.resolve(xdgDir, 'mattermost-desktop-dev.desktop'),
+            path.resolve(xdgDir, 'x9-trader-multi-server-desktop-dev.desktop'),
             `[Desktop Entry]
 Name=Mattermost.Dev
 Exec=${path.resolve(process.cwd(), 'node_modules/electron/dist/electron')} ${path.resolve(process.cwd(), 'dist')} %U
 Terminal=false
 Type=Application
-Icon=mattermost-desktop
+Icon=x9-trader-multi-server-desktop
 StartupWMClass=Mattermost
 Comment=Mattermost
 MimeType=x-scheme-handler/mattermost-dev;

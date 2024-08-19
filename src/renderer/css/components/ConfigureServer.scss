@@ -138,12 +138,20 @@
                 background-color: var(--center-channel-bg);
                 border-radius: 8px;
                 box-shadow: var(--elevation-5);
+                padding: 48px 56px;
 
+                .ConfigureServer__logo {
+                    width: 70px;
+                    height: 70px;
+                    position: relative;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    margin-bottom: 12px;
+                }
                 .ConfigureServer__card-content {
                     display: flex;
                     flex: 1;
                     flex-flow: column;
-                    padding: 48px 56px;
                     border: none;
                     box-shadow: none;
 

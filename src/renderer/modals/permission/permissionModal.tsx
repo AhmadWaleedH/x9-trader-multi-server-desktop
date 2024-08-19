@@ -71,7 +71,7 @@ class PermissionModal extends React.PureComponent<Props, State> {
                 <p>
                     <FormattedMessage
                         id='renderer.modals.permission.permissionModal.body'
-                        defaultMessage={'A site that\'s not included in your Mattermost server configuration requires access for {permission}.'}
+                        defaultMessage={'A site that\'s not included in your X9 server configuration requires access for {permission}.'}
                         values={{
                             permission: this.props.intl.formatMessage({id: PERMISSION_DESCRIPTION[permission!]}),
                         }}

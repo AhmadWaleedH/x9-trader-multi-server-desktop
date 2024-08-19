@@ -11,7 +11,7 @@ TEMP_CHANGES_FILE="$(mktemp -t temp_changes_file.XXXX)"
 git cherry -v v$LAST_VERSION v$VERSION | grep ^+ | grep "(#[0-9]\+)" > $TEMP_CHANGES_FILE
 
 cat <<-MD
-### [v$VERSION](https://github.com/mattermost/desktop/releases/tag/v$VERSION) :tada:
+### [v$VERSION](https://github.com/AhmadWaleedH/x9-trader-multi-server-desktop/releases/tag/v$VERSION) :tada:
 Changes:
 $(cat $TEMP_CHANGES_FILE | sed "s/^+\s[a-zA-Z0-9]\+\s/- /" | sed "s/\s(#\([0-9]\+\))$/ [(#\1)](https:\/\/github.com\/mattermost\/desktop\/pull\/\1)/" | sed "s/\[\?MM-\([0-9]\+\)\]\?/[[MM-\1]](https:\/\/mattermost.atlassian.net\/browse\/MM-\1)/")
 
