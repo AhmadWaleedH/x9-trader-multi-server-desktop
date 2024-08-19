@@ -310,28 +310,6 @@ function ConfigureServer({
                 <div className='ConfigureServer__body'>
                     {!mobileView && getAlternateLink()}
                     <div className='ConfigureServer__content'>
-                        <div className={classNames('ConfigureServer__message', transition)}>
-                            <h1 className='ConfigureServer__message-title'>
-                                {messageTitle || formatMessage({id: 'renderer.components.configureServer.title', defaultMessage: 'Let’s connect to a server'})}
-                            </h1>
-                            <p className='ConfigureServer__message-subtitle'>
-                                {messageSubtitle || (
-                                    <FormattedMessage
-                                        id='renderer.components.configureServer.subtitle'
-                                        defaultMessage='Set up your first server to connect to your<br></br>team’s communication hub'
-                                        values={{
-                                            br: (x: React.ReactNode) => (<><br/>{x}</>),
-                                        }}
-                                    />)
-                                }
-                            </p>
-                            <div className='ConfigureServer__message-img'>
-                                <img
-                                    src={womanLaptop}
-                                    draggable={false}
-                                />
-                            </div>
-                        </div>
                         <div className={classNames('ConfigureServer__card', transition, {'with-error': nameError || urlError?.type === STATUS.ERROR})}>
                             <img
                                 src={Logo}
@@ -385,7 +363,7 @@ function ConfigureServer({
                                         extraClasses='ConfigureServer__card-form-button'
                                         saving={waiting}
                                         onClick={handleOnSaveButtonClick}
-                                        defaultMessage={urlError?.type === STATUS.WARNING ? formatMessage({id: 'renderer.components.configureServer.connect.override', defaultMessage: 'Connect anyway'}) : formatMessage({id: 'renderer.components.configureServer.connect.default', defaultMessage: 'Connect'})
+                                        defaultMessage={formatMessage({id: 'renderer.components.configureServer.connect.default', defaultMessage: 'Connect'})
                                         }
                                         savingMessage={formatMessage({id: 'renderer.components.configureServer.connect.saving', defaultMessage: 'Connecting…'})}
                                         disabled={!canSave}
