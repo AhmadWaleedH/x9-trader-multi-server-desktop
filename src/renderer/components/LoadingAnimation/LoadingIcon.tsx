@@ -142,8 +142,7 @@ function LoadingAnimation() {
                     />
                 </g>
             </g>
-            <g className='LoadingAnimation__compass'>
-            </g>
+            <g className='LoadingAnimation__compass'/>
         </svg>
     );
 }
