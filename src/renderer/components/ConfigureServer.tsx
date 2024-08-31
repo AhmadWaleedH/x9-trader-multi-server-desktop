@@ -110,8 +110,8 @@ function ConfigureServer({
             }
             if (message) {
                 setTransition(undefined);
-                setURLError(message);
             }
+            setURLError(undefined);
             setValidating(false);
         });
     };
@@ -140,51 +140,6 @@ function ConfigureServer({
                     id: 'renderer.components.newServerModal.error.urlRequired',
                     defaultMessage: 'URL is required.',
                 }),
-            };
-        }
-
-        if (validationResult?.status === URLValidationStatus.Invalid) {
-            message = {
-                type: STATUS.ERROR,
-                value: formatMessage({
-                    id: 'renderer.components.newServerModal.error.urlIncorrectFormatting',
-                    defaultMessage: 'URL is not formatted correctly.',
-                }),
-            };
-        }
-
-        if (validationResult?.status === URLValidationStatus.Insecure) {
-            message = {
-                type: STATUS.WARNING,
-                value: formatMessage({id: 'renderer.components.configureServer.url.insecure', defaultMessage: 'Your server URL is potentially insecure. For best results, use a URL with the HTTPS protocol.'}),
-            };
-        }
-
-        if (validationResult?.status === URLValidationStatus.NotMattermost) {
-            message = {
-                type: STATUS.WARNING,
-                value: formatMessage({id: 'renderer.components.configureServer.url.notMattermost', defaultMessage: 'The server URL provided does not appear to point to a valid X9 server. Please verify the URL and check your connection.'}),
-            };
-        }
-
-        if (validationResult?.status === URLValidationStatus.URLNotMatched) {
-            message = {
-                type: STATUS.WARNING,
-                value: formatMessage({id: 'renderer.components.configureServer.url.urlNotMatched', defaultMessage: 'The server URL provided does not match the configured Site URL on your X9 server. Server version: {serverVersion}'}, {serverVersion: validationResult.serverVersion}),
-            };
-        }
-
-        if (validationResult?.status === URLValidationStatus.URLUpdated) {
-            message = {
-                type: STATUS.INFO,
-                value: formatMessage({id: 'renderer.components.configureServer.url.urlUpdated', defaultMessage: 'The server URL provided has been updated to match the configured Site URL on your X9 server. Server version: {serverVersion}'}, {serverVersion: validationResult.serverVersion}),
-            };
-        }
-
-        if (validationResult?.status === URLValidationStatus.OK) {
-            message = {
-                type: STATUS.SUCCESS,
-                value: formatMessage({id: 'renderer.components.configureServer.url.ok', defaultMessage: 'Server URL is valid. Server version: {serverVersion}'}, {serverVersion: validationResult.serverVersion}),
             };
         }
 
@@ -326,7 +281,7 @@ function ConfigureServer({
                                         inputSize={SIZE.LARGE}
                                         value={url}
                                         onChange={handleURLOnChange}
-                                        customMessage={({
+                                        customMessage={urlError ?? ({
                                             type: STATUS.INFO,
                                             value: formatMessage({id: 'renderer.components.configureServer.url.info', defaultMessage: 'The URL of your X9 server'}),
                                         })}

@@ -2,7 +2,7 @@
   "name": "x9-trader-multi-server-desktop",
   "productName": "X9 Trader Multi-Server",
   "version": "5.10.0-develop.1",
-  "description": "Mattermost",
+  "description": "X9 Trader Multi-Server",
   "main": "dist/index.js",
   "author": "X9 Trader Multi-Server, Inc.",
   "license": "Apache-2.0",

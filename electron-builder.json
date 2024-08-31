@@ -155,9 +155,7 @@
   },
   "win": {
     "target": [
-      "nsis",
-      "zip",
-      "msi"
+      "nsis"
     ],
     "extraFiles": [
       {
