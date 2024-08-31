@@ -1,19 +1,19 @@
 {
-  "name": "mattermost-desktop",
-  "productName": "Mattermost",
+  "name": "x9-trader-multi-server-desktop",
+  "productName": "X9 Trader Multi-Server",
   "version": "5.10.0-develop.1",
   "description": "Mattermost",
   "main": "dist/index.js",
-  "author": "Mattermost, Inc. <feedback@mattermost.com>",
+  "author": "X9 Trader Multi-Server, Inc.",
   "license": "Apache-2.0",
-  "desktopName": "Mattermost.Desktop",
-  "homepage": "https://mattermost.com",
+  "desktopName": "X9 Trader Multi-Server.Desktop",
+  "homepage": "https://github.com/AhmadWaleedH/x9-trader-multi-server-desktop",
   "engines": {
     "node": ">=18.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/mattermost/desktop.git"
+    "url": "git://github.com/AhmadWaleedH/x9-trader-multi-server-desktop.git"
   },
   "scripts": {
     "postinstall": "patch-package && electron-builder install-app-deps",

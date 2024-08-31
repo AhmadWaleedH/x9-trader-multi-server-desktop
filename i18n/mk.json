@@ -30,7 +30,7 @@
     "common.tabs.TAB_MESSAGING": "Канали",
     "common.tabs.TAB_FOCALBOARD": "Табли",
     "common.permissions.canBasicAuth": "Веб Aвтентикација",
-    "main.app.app.handleAppCertificateError.certError.dialog.message": "Има проблем со конфигурацијата со овој Mattermost сервер, или некој се обидува да ја пресретне вашата конекција. Можеби треба да се најавите Wi-Fi на кое што сте поврзани користејќи го вашиот веб-браузер.",
+    "main.app.app.handleAppCertificateError.certError.dialog.message": "Има проблем со конфигурацијата со овој X9 сервер, или некој се обидува да ја пресретне вашата конекција. Можеби треба да се најавите Wi-Fi на кое што сте поврзани користејќи го вашиот веб-браузер.",
     "main.CriticalErrorHandler.uncaughtException.dialog.message": "Апликацијата {appName} неочекувано се откажа. Кликнете \"{showDetails}\" за да дознаете повеќе или \"{reopen}\" за да ја отворите апликацијата поново.\n\nВнатрешна грешка: {err}",
     "main.CriticalErrorHandler.uncaughtException.button.showDetails": "Покажи детали",
     "main.CriticalErrorHandler.uncaughtException.button.reopen": "Отвори поново",
