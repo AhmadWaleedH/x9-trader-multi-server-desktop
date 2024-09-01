@@ -4,8 +4,6 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import LoadingBackground from './LoadingBackground';
-
 import useTransitionEnd from '../../hooks/useTransitionEnd';
 import LoadingAnimation from '../LoadingAnimation';
 
@@ -64,7 +62,6 @@ function LoadingScreen({loading = false, darkMode = false, onFadeOutComplete = (
                 'LoadingScreen--loaded': loadingIsComplete && loadAnimationIsComplete,
             })}
         >
-            <LoadingBackground/>
             <LoadingAnimation
                 loading={loading}
                 darkMode={darkMode}

@@ -3,11 +3,12 @@
 
 import classNames from 'classnames';
 import React, {useState, useCallback, useEffect, useRef} from 'react';
-import {useIntl, FormattedMessage} from 'react-intl';
+import {useIntl} from 'react-intl';
 
-import {MODAL_TRANSITION_TIMEOUT, URLValidationStatus} from 'common/utils/constants';
-import womanLaptop from 'renderer/assets/svg/womanLaptop.svg';
-import Header from 'renderer/components/Header';
+import {MODAL_TRANSITION_TIMEOUT, SPLASH_GIF_TIMEOUT, URLValidationStatus} from 'common/utils/constants';
+import DarkSplash from 'renderer/assets/DarkSplash.gif';
+import LightSplash from 'renderer/assets/LightSplash.gif';
+import Logo from 'renderer/assets/Logo.png';
 import Input, {STATUS, SIZE} from 'renderer/components/Input';
 import LoadingBackground from 'renderer/components/LoadingScreen/LoadingBackground';
 import SaveButton from 'renderer/components/SaveButton/SaveButton';
@@ -22,8 +23,6 @@ type ConfigureServerProps = {
     server?: UniqueServer;
     mobileView?: boolean;
     darkMode?: boolean;
-    messageTitle?: string;
-    messageSubtitle?: string;
     cardTitle?: string;
     alternateLinkMessage?: string;
     alternateLinkText?: string;
@@ -35,8 +34,6 @@ function ConfigureServer({
     server,
     mobileView,
     darkMode,
-    messageTitle,
-    messageSubtitle,
     cardTitle,
     alternateLinkMessage,
     alternateLinkText,
@@ -58,6 +55,7 @@ function ConfigureServer({
     const [nameError, setNameError] = useState('');
     const [urlError, setURLError] = useState<{type: STATUS; value: string}>();
     const [showContent, setShowContent] = useState(false);
+    const [showGif, setShowGif] = useState(true);
     const [waiting, setWaiting] = useState(false);
 
     const [validating, setValidating] = useState(false);
@@ -68,12 +66,21 @@ function ConfigureServer({
     const canSave = name && url && !nameError && !validating && urlError && urlError.type !== STATUS.ERROR;
 
     useEffect(() => {
+        if (showGif) {
+            return undefined;
+        }
         setTransition('inFromRight');
         setShowContent(true);
         mounted.current = true;
         return () => {
             mounted.current = false;
         };
+    }, [showGif]);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setShowGif(false);
+        }, SPLASH_GIF_TIMEOUT);
     }, []);
 
     const fetchValidationResult = (urlToValidate: string) => {
@@ -103,8 +110,8 @@ function ConfigureServer({
             }
             if (message) {
                 setTransition(undefined);
-                setURLError(message);
             }
+            setURLError(undefined);
             setValidating(false);
         });
     };
@@ -133,51 +140,6 @@ function ConfigureServer({
                     id: 'renderer.components.newServerModal.error.urlRequired',
                     defaultMessage: 'URL is required.',
                 }),
-            };
-        }
-
-        if (validationResult?.status === URLValidationStatus.Invalid) {
-            message = {
-                type: STATUS.ERROR,
-                value: formatMessage({
-                    id: 'renderer.components.newServerModal.error.urlIncorrectFormatting',
-                    defaultMessage: 'URL is not formatted correctly.',
-                }),
-            };
-        }
-
-        if (validationResult?.status === URLValidationStatus.Insecure) {
-            message = {
-                type: STATUS.WARNING,
-                value: formatMessage({id: 'renderer.components.configureServer.url.insecure', defaultMessage: 'Your server URL is potentially insecure. For best results, use a URL with the HTTPS protocol.'}),
-            };
-        }
-
-        if (validationResult?.status === URLValidationStatus.NotMattermost) {
-            message = {
-                type: STATUS.WARNING,
-                value: formatMessage({id: 'renderer.components.configureServer.url.notMattermost', defaultMessage: 'The server URL provided does not appear to point to a valid Mattermost server. Please verify the URL and check your connection.'}),
-            };
-        }
-
-        if (validationResult?.status === URLValidationStatus.URLNotMatched) {
-            message = {
-                type: STATUS.WARNING,
-                value: formatMessage({id: 'renderer.components.configureServer.url.urlNotMatched', defaultMessage: 'The server URL provided does not match the configured Site URL on your Mattermost server. Server version: {serverVersion}'}, {serverVersion: validationResult.serverVersion}),
-            };
-        }
-
-        if (validationResult?.status === URLValidationStatus.URLUpdated) {
-            message = {
-                type: STATUS.INFO,
-                value: formatMessage({id: 'renderer.components.configureServer.url.urlUpdated', defaultMessage: 'The server URL provided has been updated to match the configured Site URL on your Mattermost server. Server version: {serverVersion}'}, {serverVersion: validationResult.serverVersion}),
-            };
-        }
-
-        if (validationResult?.status === URLValidationStatus.OK) {
-            message = {
-                type: STATUS.SUCCESS,
-                value: formatMessage({id: 'renderer.components.configureServer.url.ok', defaultMessage: 'Server URL is valid. Server version: {serverVersion}'}, {serverVersion: validationResult.serverVersion}),
             };
         }
 
@@ -288,37 +250,21 @@ function ConfigureServer({
             )}
         >
             <LoadingBackground/>
-            <Header
-                darkMode={darkMode}
-                alternateLink={mobileView ? getAlternateLink() : undefined}
-            />
-            {showContent && (
+            {showGif ? (
+                <img
+                    src={darkMode ? DarkSplash : LightSplash}
+                    className='LoadingScreen--splash'
+                />
+            ) : null}
+            {showContent ? (
                 <div className='ConfigureServer__body'>
                     {!mobileView && getAlternateLink()}
                     <div className='ConfigureServer__content'>
-                        <div className={classNames('ConfigureServer__message', transition)}>
-                            <h1 className='ConfigureServer__message-title'>
-                                {messageTitle || formatMessage({id: 'renderer.components.configureServer.title', defaultMessage: 'Let’s connect to a server'})}
-                            </h1>
-                            <p className='ConfigureServer__message-subtitle'>
-                                {messageSubtitle || (
-                                    <FormattedMessage
-                                        id='renderer.components.configureServer.subtitle'
-                                        defaultMessage='Set up your first server to connect to your<br></br>team’s communication hub'
-                                        values={{
-                                            br: (x: React.ReactNode) => (<><br/>{x}</>),
-                                        }}
-                                    />)
-                                }
-                            </p>
-                            <div className='ConfigureServer__message-img'>
-                                <img
-                                    src={womanLaptop}
-                                    draggable={false}
-                                />
-                            </div>
-                        </div>
                         <div className={classNames('ConfigureServer__card', transition, {'with-error': nameError || urlError?.type === STATUS.ERROR})}>
+                            <img
+                                src={Logo}
+                                className='ConfigureServer__logo'
+                            />
                             <div
                                 className='ConfigureServer__card-content'
                                 onKeyDown={handleOnCardEnterKeyDown}
@@ -337,7 +283,7 @@ function ConfigureServer({
                                         onChange={handleURLOnChange}
                                         customMessage={urlError ?? ({
                                             type: STATUS.INFO,
-                                            value: formatMessage({id: 'renderer.components.configureServer.url.info', defaultMessage: 'The URL of your Mattermost server'}),
+                                            value: formatMessage({id: 'renderer.components.configureServer.url.info', defaultMessage: 'The URL of your X9 server'}),
                                         })}
                                         placeholder={formatMessage({id: 'renderer.components.configureServer.url.placeholder', defaultMessage: 'Server URL'})}
                                         disabled={waiting}
@@ -367,9 +313,7 @@ function ConfigureServer({
                                         extraClasses='ConfigureServer__card-form-button'
                                         saving={waiting}
                                         onClick={handleOnSaveButtonClick}
-                                        defaultMessage={urlError?.type === STATUS.WARNING ?
-                                            formatMessage({id: 'renderer.components.configureServer.connect.override', defaultMessage: 'Connect anyway'}) :
-                                            formatMessage({id: 'renderer.components.configureServer.connect.default', defaultMessage: 'Connect'})
+                                        defaultMessage={formatMessage({id: 'renderer.components.configureServer.connect.default', defaultMessage: 'Connect'})
                                         }
                                         savingMessage={formatMessage({id: 'renderer.components.configureServer.connect.saving', defaultMessage: 'Connecting…'})}
                                         disabled={!canSave}
@@ -380,7 +324,7 @@ function ConfigureServer({
                         </div>
                     </div>
                 </div>
-            )}
+            ) : null}
             <div className='ConfigureServer__footer'/>
         </div>
     );

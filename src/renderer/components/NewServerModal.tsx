@@ -233,7 +233,7 @@ class NewServerModal extends React.PureComponent<Props, State> {
                     <i className='icon-alert-outline'/>
                     <FormattedMessage
                         id='renderer.components.newServerModal.warning.notMattermost'
-                        defaultMessage='The server URL provided does not appear to point to a valid Mattermost server. Please verify the URL and check your connection.'
+                        defaultMessage='The server URL provided does not appear to point to a valid X9 server. Please verify the URL and check your connection.'
                     />
                 </div>
             );
@@ -246,7 +246,7 @@ class NewServerModal extends React.PureComponent<Props, State> {
                     <i className='icon-alert-outline'/>
                     <FormattedMessage
                         id='renderer.components.newServerModal.warning.urlNotMatched'
-                        defaultMessage='The server URL does not match the configured Site URL on your Mattermost server. Server version: {serverVersion}'
+                        defaultMessage='The server URL does not match the configured Site URL on your X9 server. Server version: {serverVersion}'
                         values={{serverVersion: this.state.validationResult.serverVersion}}
                     />
                 </div>
@@ -260,7 +260,7 @@ class NewServerModal extends React.PureComponent<Props, State> {
                     <i className='icon-information-outline'/>
                     <FormattedMessage
                         id='renderer.components.newServerModal.warning.urlUpdated'
-                        defaultMessage='The server URL provided has been updated to match the configured Site URL on your Mattermost server. Server version: {serverVersion}'
+                        defaultMessage='The server URL provided has been updated to match the configured Site URL on your X9 server. Server version: {serverVersion}'
                         values={{serverVersion: this.state.validationResult.serverVersion}}
                     />
                 </div>
@@ -443,7 +443,7 @@ class NewServerModal extends React.PureComponent<Props, State> {
                             <FormText>
                                 <FormattedMessage
                                     id='renderer.components.newServerModal.serverURL.description'
-                                    defaultMessage='The URL of your Mattermost server. Must start with http:// or https://.'
+                                    defaultMessage='The URL of your X9 server. Must start with http:// or https://.'
                                 />
                             </FormText>
                         </FormGroup>
@@ -478,7 +478,7 @@ class NewServerModal extends React.PureComponent<Props, State> {
                         className='NewServerModal-validation'
                     >
                         {this.getServerNameMessage()}
-                        {this.getServerURLMessage()}
+                        {/* {this.getServerURLMessage()} */}
                     </div>
                     {this.props.editMode &&
                         <>

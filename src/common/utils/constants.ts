@@ -8,6 +8,7 @@ export const DEVELOPMENT = 'development';
 export const SECOND = 1000;
 export const RELOAD_INTERVAL = 5 * SECOND;
 export const MODAL_TRANSITION_TIMEOUT = 400;
+export const SPLASH_GIF_TIMEOUT = 2500;
 
 export const MAX_SERVER_RETRIES = 3;
 

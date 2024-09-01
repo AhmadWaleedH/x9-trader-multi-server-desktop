@@ -65,3 +65,7 @@ body {
     
     transition: opacity 150ms 0ms ease-in, visibility 150ms 0ms step-end;
 }
+.LoadingScreen--splash {
+    width: 100%;
+    min-height: 100%;
+}
