@@ -64,6 +64,7 @@ function LoadingScreen({loading = false, darkMode = false, onFadeOutComplete = (
                 'LoadingScreen--loaded': loadingIsComplete && loadAnimationIsComplete,
             })}
         >
+            <LoadingBackground/>
             <LoadingAnimation
                 loading={loading}
                 darkMode={darkMode}

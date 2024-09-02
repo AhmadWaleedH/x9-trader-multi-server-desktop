@@ -2,19 +2,19 @@
 // See LICENSE.txt for license information.
 
 import classNames from 'classnames';
-import React, {useState, useCallback, useEffect, useRef} from 'react';
-import {useIntl, FormattedMessage} from 'react-intl';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
+import { useIntl, FormattedMessage } from 'react-intl';
 
-import {MODAL_TRANSITION_TIMEOUT, SPLASH_GIF_TIMEOUT, URLValidationStatus} from 'common/utils/constants';
+import { MODAL_TRANSITION_TIMEOUT, SPLASH_GIF_TIMEOUT, URLValidationStatus } from 'common/utils/constants';
 import DarkSplash from 'renderer/assets/DarkSplash.gif';
 import LightSplash from 'renderer/assets/LightSplash.gif';
 import Logo from 'renderer/assets/Logo.png';
 import womanLaptop from 'renderer/assets/svg/womanLaptop.svg';
-import Input, {STATUS, SIZE} from 'renderer/components/Input';
+import Input, { STATUS, SIZE } from 'renderer/components/Input';
 import LoadingBackground from 'renderer/components/LoadingScreen/LoadingBackground';
 import SaveButton from 'renderer/components/SaveButton/SaveButton';
 
-import type {UniqueServer} from 'types/config';
+import type { UniqueServer } from 'types/config';
 
 import 'renderer/css/components/Button.scss';
 import 'renderer/css/components/ConfigureServer.scss';
@@ -45,7 +45,7 @@ function ConfigureServer({
     alternateLinkURL,
     onConnect,
 }: ConfigureServerProps) {
-    const {formatMessage} = useIntl();
+    const { formatMessage } = useIntl();
 
     const {
         name: prevName,
@@ -58,7 +58,7 @@ function ConfigureServer({
     const [name, setName] = useState(prevName || '');
     const [url, setUrl] = useState(prevURL || '');
     const [nameError, setNameError] = useState('');
-    const [urlError, setURLError] = useState<{type: STATUS; value: string}>();
+    const [urlError, setURLError] = useState<{ type: STATUS; value: string }>();
     const [showContent, setShowContent] = useState(false);
     const [showGif, setShowGif] = useState(true);
     const [waiting, setWaiting] = useState(false);
@@ -92,11 +92,11 @@ function ConfigureServer({
         setValidating(true);
         setURLError({
             type: STATUS.INFO,
-            value: formatMessage({id: 'renderer.components.configureServer.url.validating', defaultMessage: 'Validating...'}),
+            value: formatMessage({ id: 'renderer.components.configureServer.url.validating', defaultMessage: 'Validating...' }),
         });
         const requestTime = Date.now();
         validationTimestamp.current = requestTime;
-        validateURL(urlToValidate).then(({validatedURL, serverName, message}) => {
+        validateURL(urlToValidate).then(({ validatedURL, serverName, message }) => {
             if (editing.current) {
                 setValidating(false);
                 setURLError(undefined);
@@ -158,39 +158,46 @@ function ConfigureServer({
             };
         }
 
-        if (validationResult?.status === URLValidationStatus.Insecure) {
-            message = {
-                type: STATUS.WARNING,
-                value: formatMessage({id: 'renderer.components.configureServer.url.insecure', defaultMessage: 'Your server URL is potentially insecure. For best results, use a URL with the HTTPS protocol.'}),
-            };
-        }
+        // if (validationResult?.status === URLValidationStatus.Insecure) {
+        //     message = {
+        //         type: STATUS.WARNING,
+        //         value: formatMessage({id: 'renderer.components.configureServer.url.insecure', defaultMessage: 'Your server URL is potentially insecure. For best results, use a URL with the HTTPS protocol.'}),
+        //     };
+        // }
 
-        if (validationResult?.status === URLValidationStatus.NotMattermost) {
-            message = {
-                type: STATUS.WARNING,
-                value: formatMessage({id: 'renderer.components.configureServer.url.notMattermost', defaultMessage: 'The server URL provided does not appear to point to a valid X9 server. Please verify the URL and check your connection.'}),
-            };
-        }
+        // if (validationResult?.status === URLValidationStatus.NotMattermost) {
+        //     message = {
+        //         type: STATUS.WARNING,
+        //         value: formatMessage({id: 'renderer.components.configureServer.url.notMattermost', defaultMessage: 'The server URL provided does not appear to point to a valid X9 server. Please verify the URL and check your connection.'}),
+        //     };
+        // }
 
-        if (validationResult?.status === URLValidationStatus.URLNotMatched) {
-            message = {
-                type: STATUS.WARNING,
-                value: formatMessage({id: 'renderer.components.configureServer.url.urlNotMatched', defaultMessage: 'The server URL provided does not match the configured Site URL on your X9 server. Server version: {serverVersion}'}, {serverVersion: validationResult.serverVersion}),
-            };
-        }
+        // if (validationResult?.status === URLValidationStatus.URLNotMatched) {
+        //     message = {
+        //         type: STATUS.WARNING,
+        //         value: formatMessage({id: 'renderer.components.configureServer.url.urlNotMatched', defaultMessage: 'The server URL provided does not match the configured Site URL on your X9 server. Server version: {serverVersion}'}, {serverVersion: validationResult.serverVersion}),
+        //     };
+        // }
 
-        if (validationResult?.status === URLValidationStatus.URLUpdated) {
-            message = {
-                type: STATUS.INFO,
-                value: formatMessage({id: 'renderer.components.configureServer.url.urlUpdated', defaultMessage: 'The server URL provided has been updated to match the configured Site URL on your X9 server. Server version: {serverVersion}'}, {serverVersion: validationResult.serverVersion}),
-            };
-        }
+        // if (validationResult?.status === URLValidationStatus.URLUpdated) {
+        //     message = {
+        //         type: STATUS.INFO,
+        //         value: formatMessage({id: 'renderer.components.configureServer.url.urlUpdated', defaultMessage: 'The server URL provided has been updated to match the configured Site URL on your X9 server. Server version: {serverVersion}'}, {serverVersion: validationResult.serverVersion}),
+        //     };
+        // }
 
         if (validationResult?.status === URLValidationStatus.OK) {
             message = {
                 type: STATUS.SUCCESS,
-                value: formatMessage({id: 'renderer.components.configureServer.url.ok', defaultMessage: 'Server URL is valid. Server version: {serverVersion}'}, {serverVersion: validationResult.serverVersion}),
+                value: formatMessage({ id: 'renderer.components.configureServer.url.ok', defaultMessage: 'Server URL is valid. Server version: {serverVersion}' }, { serverVersion: validationResult.serverVersion }),
             };
+        }
+
+        if (!message) {
+            message = {
+                type: STATUS.INFO,
+                value: formatMessage({ id: 'renderer.components.configureServer.url.info', defaultMessage: 'The URL of your X9 server' }),
+            }
         }
 
         return {
@@ -331,7 +338,7 @@ function ConfigureServer({
                                         inputSize={SIZE.LARGE}
                                         value={url}
                                         onChange={handleURLOnChange}
-                                        customMessage={({
+                                        customMessage={urlError ?? ({
                                             type: STATUS.INFO,
                                             value: formatMessage({id: 'renderer.components.configureServer.url.info', defaultMessage: 'The URL of your X9 server'}),
                                         })}

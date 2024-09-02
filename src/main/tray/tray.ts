@@ -50,16 +50,17 @@ export class TrayIcon {
 
         switch (process.platform) {
         case 'win32':
+            const tryIcon = nativeImage.createFromPath(path.resolve(assetsDir, `windows/tray.ico`));
             this.images = {
-                normal: nativeImage.createFromPath(path.resolve(assetsDir, `windows/tray_${winTheme}.ico`)),
-                unread: nativeImage.createFromPath(path.resolve(assetsDir, `windows/tray_${winTheme}_unread.ico`)),
-                mention: nativeImage.createFromPath(path.resolve(assetsDir, `windows/tray_${winTheme}_mention.ico`)),
+                normal: tryIcon,
+                unread: tryIcon,
+                mention: tryIcon,
             };
             break;
         case 'darwin':
         {
-            const osxNormal = nativeImage.createFromPath(path.resolve(assetsDir, 'osx/menuIcons/MenuIcon16Template.png'));
-            const osxUnread = nativeImage.createFromPath(path.resolve(assetsDir, 'osx/menuIcons/MenuIconUnread16Template.png'));
+            const osxNormal = nativeImage.createFromPath(path.resolve(assetsDir, 'osx/menuIcons/tray.png'));
+            const osxUnread = nativeImage.createFromPath(path.resolve(assetsDir, 'osx/menuIcons/tray.png'));
             osxNormal.setTemplateImage(true);
             osxUnread.setTemplateImage(true);
 
