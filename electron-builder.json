@@ -45,7 +45,7 @@
   "afterAllArtifactBuild": "scripts/afterbuild.js",
   "deb": {
     "artifactName": "${version}/${name}_${version}-1_${arch}.${ext}",
-    "synopsis": "Mattermost Desktop App",
+    "synopsis": "X9HQ Desktop App",
     "depends": [
       "libnotify4",
       "libxtst6",
@@ -105,9 +105,9 @@
     "entitlements": "./resources/mac/entitlements.mac.plist",
     "entitlementsInherit": "./resources/mac/entitlements.mac.inherit.plist",
     "extendInfo": {
-      "NSMicrophoneUsageDescription": "Microphone access may be used by Mattermost plugins, such as Jitsi video conferencing.",
-      "NSCameraUsageDescription": "Camera access may be used by Mattermost plugins, such as Jitsi video conferencing.",
-      "NSFocusStatusUsageDescription": "Focus status is used by Mattermost to determine whether to send notifications or not.",
+      "NSMicrophoneUsageDescription": "Microphone access may be used by X9HQ plugins, such as Jitsi video conferencing.",
+      "NSCameraUsageDescription": "Camera access may be used by X9HQ plugins, such as Jitsi video conferencing.",
+      "NSFocusStatusUsageDescription": "Focus status is used by X9HQ to determine whether to send notifications or not.",
       "LSFileQuarantineEnabled": true
     },
     "notarize": {
@@ -172,7 +172,7 @@
       }
     ],
     "signDlls": true,
-    "publisherName": "CN=\"Mattermost, Inc.\", O=\"Mattermost, Inc.\", L=Palo Alto, S=California, C=US"
+    "publisherName": "CN=\"X9HQ, Inc.\", O=\"X9HQ, Inc.\", L=Palo Alto, S=California, C=US"
   },
   "nsis": {
     "artifactName": "${version}/${name}-setup-${version}-win.${ext}",
