@@ -224,19 +224,19 @@ class NewServerModal extends React.PureComponent<Props, State> {
                     />
                 </div>
             );
-        case URLValidationStatus.NotMattermost:
-            return (
-                <div
-                    id='urlValidation'
-                    className='warning'
-                >
-                    <i className='icon-alert-outline'/>
-                    <FormattedMessage
-                        id='renderer.components.newServerModal.warning.notMattermost'
-                        defaultMessage='The server URL provided does not appear to point to a valid X9 server. Please verify the URL and check your connection.'
-                    />
-                </div>
-            );
+        // case URLValidationStatus.NotMattermost:
+        //     return (
+        //         <div
+        //             id='urlValidation'
+        //             className='warning'
+        //         >
+        //             <i className='icon-alert-outline'/>
+        //             <FormattedMessage
+        //                 id='renderer.components.newServerModal.warning.notMattermost'
+        //                 defaultMessage='The server URL provided does not appear to point to a valid X9 server. Please verify the URL and check your connection.'
+        //             />
+        //         </div>
+        //     );
         case URLValidationStatus.URLNotMatched:
             return (
                 <div
@@ -551,7 +551,7 @@ class NewServerModal extends React.PureComponent<Props, State> {
                                     <FormText>
                                         <FormattedMessage
                                             id='renderer.components.newServerModal.permissions.notifications.mac'
-                                            defaultMessage='You may also need to enable notifications in macOS for Mattermost. Click <link>here</link> to open the System Preferences.'
+                                            defaultMessage='You may also need to enable notifications in macOS for X9HQ. Click <link>here</link> to open the System Preferences.'
                                             values={notificationValues}
                                         />
                                     </FormText>
@@ -560,7 +560,7 @@ class NewServerModal extends React.PureComponent<Props, State> {
                                         <FormText>
                                             <FormattedMessage
                                                 id='renderer.components.newServerModal.permissions.notifications.windows'
-                                                defaultMessage='You may also need to enable notifications in Windows for Mattermost. Click <link>here</link> to open the Notification Settings.'
+                                                defaultMessage='You may also need to enable notifications in Windows for X9HQ. Click <link>here</link> to open the Notification Settings.'
                                                 values={notificationValues}
                                             />
                                         </FormText>
