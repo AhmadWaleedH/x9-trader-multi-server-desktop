@@ -6,6 +6,7 @@ import React from 'react';
 
 import useTransitionEnd from '../../hooks/useTransitionEnd';
 import LoadingAnimation from '../LoadingAnimation';
+import LoadingBackground from './LoadingBackground';
 
 type Props = {
     loading?: boolean;
@@ -55,21 +56,21 @@ function LoadingScreen({loading = false, darkMode = false, onFadeOutComplete = (
     }
 
     const loadingScreen = (
-        <></>
+        <div
+            ref={loadingScreenRef}
+            className={classNames('LoadingScreen', {
+                'LoadingScreen--darkMode': darkMode,
+                'LoadingScreen--loaded': loadingIsComplete && loadAnimationIsComplete,
+            })}
+        >
+            <LoadingBackground/>
+            <LoadingAnimation
+                loading={loading}
+                darkMode={darkMode}
+                onLoadAnimationComplete={handleLoadAnimationComplete}
+            />
 
-        // <div
-        //     ref={loadingScreenRef}
-        //     className={classNames('LoadingScreen', {
-        //         'LoadingScreen--darkMode': darkMode,
-        //         'LoadingScreen--loaded': loadingIsComplete && loadAnimationIsComplete,
-        //     })}
-        // >
-        //     <LoadingAnimation
-        //         loading={loading}
-        //         darkMode={darkMode}
-        //         onLoadAnimationComplete={handleLoadAnimationComplete}
-        //     />
-        // </div>
+        </div>
     );
 
     return loadingInProgress() ? loadingScreen : null;
