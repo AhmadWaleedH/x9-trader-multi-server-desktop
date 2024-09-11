@@ -62,8 +62,8 @@ function LoadingScreen({loading = false, darkMode = false, onFadeOutComplete = (
                 'LoadingScreen--darkMode': darkMode,
                 'LoadingScreen--loaded': loadingIsComplete && loadAnimationIsComplete,
             })}
-        >
-            <LoadingBackground/>
+        >{darkMode? <div style={{background:'black'}}></div>:<div style={{background:'white'}}></div>}
+            {/* <LoadingBackground/> */}
             <LoadingAnimation
                 loading={loading}
                 darkMode={darkMode}

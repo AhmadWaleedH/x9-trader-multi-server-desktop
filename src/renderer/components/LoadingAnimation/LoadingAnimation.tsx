@@ -83,7 +83,7 @@ function LoadingAnimation({
                 'LoadingAnimation--loaded': animationState === LOADING_STATE.LOADED,
             })}
         >
-            <LoadingIcon/>
+         <LoadingIcon/>
         </div>
     );
 }
